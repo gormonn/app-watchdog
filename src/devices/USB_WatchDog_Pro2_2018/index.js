@@ -99,12 +99,13 @@ function paramsParse(message){
 
 function portDataHandler(data){
     const result = data.toString();
+    this.outputGet(result)
     switch(0){
         case result.indexOf(actionsList[PAUSE]):{
-            return console.log('Watchdog: Wait timer was paused!');
+            return this.outputLog('Watchdog: Wait timer was paused!');
         }
         case result.indexOf(actionsList[RESUME]):{
-            return console.log('Watchdog: Wait timer was resumed!');
+            return this.outputLog('Watchdog: Wait timer was resumed!');
         }
         default:{            
             if(new RegExp(actionsList[PARAMS_GET]).test(result)){
@@ -112,7 +113,7 @@ function portDataHandler(data){
                 // match params
                 if(this.params.waitTime !== this.waitTime){
                     this.PARAMS_SET(this.waitTime)
-                    return console.log('Watchdog: params was changed!')
+                    return this.outputLog(`Watchdog: params was changed! waitTime: ${this.waitTime}`)
                 }
             }
             break;

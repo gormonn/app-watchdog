@@ -10,9 +10,18 @@ Example usage:
 ```
 const WatchDog = require('app-watchdog');
 
+const logger = (msg) => console.log(msg);
+
 const wd = WatchDog(
     {waitTime: 1},
-    {messageInterval: 2000},
+    {
+        messageInterval: 2000,
+        outputGet: (msg) => console.log('get message:', msg),
+        outputSent: (msg) => console.log('sent message:', msg),
+        outputLog: logger,
+        outputErr: logger,
+        onStart: () => console.log(msg)
+    },
 ).init()
 
 wd.ALIVE(); // Send alive signal to Watchdog

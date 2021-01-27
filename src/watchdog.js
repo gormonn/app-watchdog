@@ -4,43 +4,70 @@ const devices = require('./devices')
 
 class SerialConnector{
     constructor(deviceParams, props){
-        this.params = Object.assign({}, this.paramsDefault, deviceParams);
+        this.params = false;// Object.assign({}, this.paramsDefault, deviceParams);
         
         const {
-            messageInterval = 1000
+            messageInterval = 1000,
+            outputGet = ()=>{},
+            outputSent = ()=>{},
+            outputLog = ()=>{},
+            outputErr = ()=>{}
         } = props;
+
+        // this.
+        // this.onFail = onFail;
+        this.outputGet = outputGet;
+        this.outputSent = outputSent;
+        this.outputLog = outputLog;
+        this.outputErr = outputErr;
 
         this.waitTime = String(deviceParams.waitTime);
         this.messageInterval = messageInterval;
-        this.onPortOpen = this.onPortOpen.bind(this)
-        this.onPortClose = this.onPortClose.bind(this)
+        this.onPortOpen = this.onPortOpen.bind(this);
+        this.onPortClose = this.onPortClose.bind(this);
+        this.onPortError = this.onPortError.bind(this);
 
         this.portDataHandler = this.portDataHandler.bind(this)
     }
     init(){
-        if(this.waitTime >= 10) return console.error('Watchdog: WaitTime can be 0-9 min')
-        SerialPort.list().then(ports => {
-            const { findPort } = this.deviceInfo;
-            this.port = ports.find(findPort)
-            if (!this.port) {;
-                return console.error('Watchdog: Not found')
-            }
-            console.error('Watchdog: was found!')
-            this.connect()
-        })
-        return this;
+        if(this.waitTime >= 10){
+            this.outputErr('Watchdog: WaitTime can be 0-9 min')
+            return this;
+        }
+        try{
+            SerialPort.list().then(ports => {
+                const { findPort } = this.deviceInfo;
+                this.port = ports.find(findPort)
+                if (!this.port) {
+                    // this.onFail()
+                    return this.outputErr('Watchdog: Not found')
+                }
+                this.outputErr('Watchdog: was found!')
+                this.connect()
+            })
+            return this;
+        }catch(err){
+            this.outputErr(`Watchdog InitError: ${err.message}`)
+            return this;
+        }
     }
     connect(){
-        this.watchDog = new SerialPort(this.port.path, { autoOpen: false })
-        this.watchDog.open(this.onPortOpen)
+        this.watchDog = new SerialPort(this.port.path);//, { autoOpen: false })
+        this.watchDog.on('open', this.onPortOpen)
         this.watchDog.on('close', this.onPortClose)
         // Switches the port into "flowing mode"
         this.watchDog.on('data', this.portDataHandler)
+        this.watchDog.on('error', this.onPortError)
+    }
+    onPortError(err){
+        this.outputErr(`Watchdog PortError: ${err.message}`)
     }
     onPortOpen(err){
-        console.log('WatchDog: open port')
+        this.outputLog('WatchDog: open port')
         if (err) {
-            return console.log('WatchDog: Error opening port: ', err.message)
+            // this.onFail()
+            this.outputLog('WatchDog: Error opening port: ' + err.message)
+            return this.init()
         }        
         this.PARAMS_GET();
 
@@ -52,10 +79,11 @@ class SerialConnector{
     }
     onPortClose(){
         // this.init();
-        console.log('WatchDog: close port')
+        this.outputLog('WatchDog: close port')
     }
     send(message){
         this.watchDog.write(message)
+        this.outputSent(message)
     }
 }
 
