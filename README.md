@@ -1,5 +1,8 @@
 # app-watchdog
 
+A package for controlling a Watchdog device from a JavaScript-based application.
+Relevant for Electron / WebView. For kiosks and exhibition centers, where there is a problem with the application freezing, and you need a quick solution.
+
 Supported devices:
 * [WatchDogPro2](https://open-dev.ru/mining/tproduct/230408497-494995827972-usb-watchdog-pro2)
 

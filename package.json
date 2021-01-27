@@ -1,13 +1,21 @@
 {
-  "name": "serialport",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "app-watchdog",
+  "version": "0.0.1",
+  "description": "Controlling a Watchdog device from a JavaScript-based application.",
+  "main": "src/index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Dmitriy Aleksandrovich Chernukho <wfuzerbar@gmail.com> (https://github.com/gormonn)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gormonn/app-watchdog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gormonn/app-watchdog/issues"
+  },
+  "homepage": "https://github.com/gormonn/app-watchdog#readme",
   "license": "ISC",
   "dependencies": {
     "polyfill-object.fromentries": "^1.0.1",

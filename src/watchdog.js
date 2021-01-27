@@ -59,7 +59,7 @@ class SerialConnector{
     }
 }
 
-function WatchDog(deviceParams = {}, props = {}, deviceName = 'WatchDogPro2'){
+module.exports = function WatchDog(deviceParams = {}, props = {}, deviceName = 'WatchDogPro2'){
     const device = devices[deviceName];
     const mixin = getMixin(device);
     Object.assign(SerialConnector.prototype, mixin)
