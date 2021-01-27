@@ -1,12 +1,16 @@
 {
   "name": "app-watchdog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Controlling a Watchdog device from a JavaScript-based application.",
   "main": "src/index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "watchdog",
+    "watch dog pro 2"
+  ],
   "author": "Dmitriy Aleksandrovich Chernukho <wfuzerbar@gmail.com> (https://github.com/gormonn)",
   "repository": {
     "type": "git",
