@@ -31,3 +31,5 @@ wd.params; // Get watchdog parameters
 wd.port; // Get port info
 wd.paramsDefault; // Get default params
 ```
+
+[You can buy me an apple](https://www.buymeacoffee.com/gormonn)
