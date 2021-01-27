@@ -1,5 +1,3 @@
-if(!Object.fromEntries) require('polyfill-object.fromentries');
-
 function createMethod(messageGetter){
     return function(params){
         const message = messageGetter(params);
