@@ -3,8 +3,14 @@
 A package for controlling a Watchdog device from a JavaScript-based application.
 Relevant for Electron / WebView. For kiosks and exhibition centers, where there is a problem with the application freezing, and you need a quick solution.
 
+PS:
+The main idea was to make this library "modular". To work with various USB Watchdog devices. To achieve this goal, I decided to use mixins.
+
 Supported devices:
 * [WatchDogPro2](https://open-dev.ru/mining/tproduct/230408497-494995827972-usb-watchdog-pro2)
+
+Supported OS:
+* Linux
 
 Install:
 ```
