@@ -6,6 +6,11 @@ Relevant for Electron / WebView. For kiosks and exhibition centers, where there 
 Supported devices:
 * [WatchDogPro2](https://open-dev.ru/mining/tproduct/230408497-494995827972-usb-watchdog-pro2)
 
+Install:
+```
+yarn add app-watchdog
+```
+
 Example usage:
 ```
 const WatchDog = require('app-watchdog');
