@@ -11,6 +11,7 @@ Supported devices:
 
 Supported OS:
 * Linux
+* Windows
 
 Install:
 ```
