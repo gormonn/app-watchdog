@@ -1,3 +1,4 @@
+console.time('wd');
 const SerialPort = require('serialport')
 const {getMixin} = require('./utils')
 const devices = require('./devices')
@@ -8,13 +9,16 @@ class SerialConnector{
         
         const {
             messageInterval = 1000,
+            testTimeout = false,
             outputGet = ()=>{},
             outputSent = ()=>{},
             outputLog = ()=>{},
-            outputErr = ()=>{}
+            outputErr = ()=>{},
+            // listenOnly = false
         } = props;
 
-        // this.
+        this.testTimeout = testTimeout;
+        // this.listenOnly = listenOnly
         // this.onFail = onFail;
         this.outputGet = outputGet;
         this.outputSent = outputSent;
@@ -76,10 +80,18 @@ class SerialConnector{
                 this.ALIVE()
             }, this.messageInterval)
         }
+        
+        if(this.testTimeout){
+            setTimeout(() => {
+                clearInterval(this.interval)
+            }, this.testTimeout);
+        }
     }
     onPortClose(){
         // this.init();
         this.outputLog('WatchDog: close port')
+        console.timeEnd('wd');
+        process.exit()
     }
     send(message){
         this.watchDog.write(message)
