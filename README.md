@@ -9,9 +9,10 @@ The main idea was to make this library "modular". To work with various USB Watch
 Supported devices:
 * [WatchDogPro2](https://open-dev.ru/mining/tproduct/230408497-494995827972-usb-watchdog-pro2)
 
-Supported OS:
+Supported OS (by [serialport](https://www.npmjs.com/package/serialport)):
 * Linux
 * Windows
+* OSX
 
 Install:
 ```
