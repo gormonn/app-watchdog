@@ -3,9 +3,6 @@
 A package for controlling a Watchdog device from a JavaScript-based application.
 Relevant for Electron / WebView. For kiosks and exhibition centers, where there is a problem with the application freezing, and you need a quick solution.
 
-PS:
-The main idea was to make this library "modular". To work with various USB Watchdog devices. To achieve this goal, I decided to use mixins.
-
 Supported devices:
 * [WatchDogPro2](https://open-dev.ru/mining/tproduct/230408497-494995827972-usb-watchdog-pro2)
 
@@ -54,4 +51,16 @@ wd.port; // Get port info
 wd.paramsDefault; // Get default params
 ```
 
+The main idea was to make this library "modular". To work with various USB Watchdog devices. To achieve this goal, I decided to use mixins.
+
+As planned, you can safely add your modules for specific devices to this repository. Using this [template](https://github.com/gormonn/app-watchdog/blob/main/src/devices/USB_WatchDog_Pro2_2018/index.js). It is important to understand that the keys of the `actionsList` object must remain unchanged. At least **ALIVE**, **PARAMS_GET**, **PARAMS_SET**.
+Or, I need to add a plugin system. How do you think?
+
+Any suggestions are greatly appreciated.
+
+Attention!
+I have nothing to do with [OpenDev](https://open-dev.ru/watchdog).
+Use this at your own risk.
+
 [You can buy me an apple](https://www.buymeacoffee.com/gormonn)
+
