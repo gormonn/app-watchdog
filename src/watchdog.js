@@ -10,7 +10,7 @@ class SerialConnector{
         const {
             messageInterval = 1000,
             testTimeout = false,
-            outputGet = ()=>{},
+            outputGet= ()=>{},
             outputSent = ()=>{},
             outputLog = ()=>{},
             outputErr = ()=>{},
