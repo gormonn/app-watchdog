@@ -13,7 +13,7 @@ class SerialConnector{
             outputGet= ()=>{},
             outputSent = ()=>{},
             outputLog = ()=>{},
-            outputErr = ()=>{},
+            outputErr = ()=>{}
             // listenOnly = false
         } = props;
 
@@ -72,7 +72,11 @@ class SerialConnector{
             // this.onFail()
             this.outputLog('WatchDog: Error opening port: ' + err.message)
             return this.init()
-        }        
+        }
+        // при запуске системы мы отправляем паузу,
+        // что бы вачдог не перезапустил комп пока не загрузится приложение.
+        // поэтому, при старте приложения, мы должны возобновить таймер.
+        this.RESUME();
         this.PARAMS_GET();
 
         if(this.messageInterval){
